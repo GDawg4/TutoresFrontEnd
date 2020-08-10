@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 import {KeyboardAvoidingView} from "react-native";
 import { reduxForm, Field } from 'redux-form';
 import {connect} from "react-redux";
+import {Link} from "react-router-native";
 //import Carousel from "react-native-snap-carousel";
 
 import FormTextInput from "../FormTextInput";
@@ -24,7 +25,7 @@ const Registry = () => {
             </View>
             <KeyboardAvoidingView style = {styles.container}>
                 <View style = {styles.elements}>
-                    <Text>Ingreso</Text>
+                    <Text style = {styles.inputTitle}>Ingreso</Text>
                     <Field
                         name = {'email'}
                         component={FormTextInput}
@@ -41,6 +42,9 @@ const Registry = () => {
                         autoCapitalize='none'
                         returnKeyType='next'
                     />
+                    <Link to = '/registry'>
+                        <Text style = {styles.smallPrint}>Registrarse</Text>
+                    </Link>
                     <Button label={'Entrar'} disabled={false}/>
                 </View>
             </KeyboardAvoidingView>
@@ -55,9 +59,9 @@ const styles = StyleSheet.create({
         borderRadius:10,
         borderColor:'#000000',
         position:'absolute',
-        right:'10%',
+        right:'5%',
         top:'35%',
-        height:'25%',
+        height:'contain',
         width:'10%',
         flexDirection:'column'
     },
@@ -67,20 +71,30 @@ const styles = StyleSheet.create({
         marginTop:'10%'
     },
     image:{
-        flex: 1,
+        height:'100%',
         width: "100%",
         resizeMode: "contain",
-        alignSelf: "center"
-    },
-    imageContainer:{
-        width:'50%',
-        height:'50%',
+        alignSelf: "center",
         position:'absolute',
         left:0
     },
+    imageContainer:{
+        width:'80%',
+        height:'90%',
+        position:'absolute'
+    },
     global:{
-        height:'100%',
+        height:'90%',
         width:'100%'
+    },
+    inputTitle:{
+        fontWeight:'bold'
+    },
+    smallPrint:{
+        fontSize:'small',
+        fontColor:'blue',
+        textAlign:'center',
+        marginBottom:'5%'
     }
 })
 

@@ -8,12 +8,25 @@ const { store, persistor } = configureStore();
 
 import Class from "./src/components/Class";
 import Registry from "./src/components/Registry";
+import Header from "./src/components/Header";
+import {NativeRouter, Route} from "react-router-native";
+import NewAccount from "./src/components/NewAccount";
 
 const App = ()=>(
     <Provider store = {store}>
         <View style={styles.container}>
             {/*<Text>Open up App.js to start working on your app!</Text>*/}
+            <Header/>
             <StatusBar style="auto" />
+            <NativeRouter>
+                <Route
+                    exact path='/registry'
+                    component = {NewAccount}/>
+
+                <Route
+                    exact path='/login'
+                    component = {Registry}/>
+            </NativeRouter>
             <Registry/>
         </View>
     </Provider>
