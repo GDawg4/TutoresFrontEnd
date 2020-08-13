@@ -1,10 +1,9 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
-import {KeyboardAvoidingView} from "react-native";
+import { View, Text, StyleSheet, Image, KeyboardAvoidingView } from 'react-native'
 import { reduxForm, Field } from 'redux-form';
 import {connect} from "react-redux";
-import {Link} from "react-router-native";
 //import Carousel from "react-native-snap-carousel";
+import {Link} from "react-router-dom";
 
 import FormTextInput from "../FormTextInput";
 import Button from "../Button";
@@ -42,7 +41,7 @@ const Registry = () => {
                         autoCapitalize='none'
                         returnKeyType='next'
                     />
-                    <Link to = '/registry'>
+                    <Link to='/register'>
                         <Text style = {styles.smallPrint}>Registrarse</Text>
                     </Link>
                     <Button label={'Entrar'} disabled={false}/>
@@ -59,10 +58,9 @@ const styles = StyleSheet.create({
         borderRadius:10,
         borderColor:'#000000',
         position:'absolute',
-        right:'5%',
-        top:'35%',
-        height:'contain',
-        width:'10%',
+        top:'30%',
+        height:'40%',
+        width:'20%',
         flexDirection:'column'
     },
     elements:{
@@ -73,19 +71,24 @@ const styles = StyleSheet.create({
     image:{
         height:'100%',
         width: "100%",
-        resizeMode: "contain",
+        resizeMode: "cover",
         alignSelf: "center",
         position:'absolute',
-        left:0
+        left:0,
+        blurRadius:30,
+        opacity:'90%'
     },
     imageContainer:{
-        width:'80%',
-        height:'90%',
-        position:'absolute'
+        width:'100%',
+        height:'100%',
+        position:'absolute',
+        left: 0,
+        top: '5%'
     },
     global:{
-        height:'90%',
-        width:'100%'
+        height:'91%',
+        width:'100%',
+        alignItems:'center'
     },
     inputTitle:{
         fontWeight:'bold'
