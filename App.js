@@ -8,9 +8,10 @@ import { configureStore } from './src/store';
 const { store, persistor } = configureStore();
 
 import Class from "./src/components/Class";
-import Registry from "./src/components/Registry";
+import Registry from "./src/components/LogIn";
 import Header from "./src/components/Header";
-import NewAccount from "./src/components/NewAccount";
+import NewAccount from "./src/components/SignUp";
+import Home from './src/components/Home';
 
 const App = ()=>(
     <Provider store = {store}>
@@ -20,6 +21,7 @@ const App = ()=>(
                 <Switch>
                     <Route path = '/' exact component = {Registry}/>
                     <Route path = '/register' exact component={NewAccount}/>
+                    <Route path = '/home' exact component={Home}/>
                 </Switch>
             </View>
         </Router>

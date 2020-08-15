@@ -1,22 +1,17 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image, KeyboardAvoidingView } from 'react-native'
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, formValueSelector } from 'redux-form';
 import {connect} from "react-redux";
-//import Carousel from "react-native-snap-carousel";
 import {Link} from "react-router-dom";
 
 import FormTextInput from "../FormTextInput";
 import Button from "../Button";
 import cafeteria from '../../assets/cafeteria.jpg'
+import * as actions from '../../actions/auth'
 
-const Registry = () => {
-    const _renderItem = ({item, index}) => {
-        return (
-            <View style={styles.slide}>
-                <Image source = {item} styles = {styles.imageContainer}/>
-            </View>
-        );
-    }
+const formValue = formValueSelector('logIn');
+
+const Registry = ({startLogin}) => {
     return(
         <View style = {styles.global}>
             <View style={styles.imageContainer}>
@@ -44,7 +39,7 @@ const Registry = () => {
                     <Link to='/register'>
                         <Text style = {styles.smallPrint}>Registrarse</Text>
                     </Link>
-                    <Button label={'Entrar'} disabled={false}/>
+                    <Button label={'Entrar'} disabled={false} onPress={startLogin}/>
                 </View>
             </KeyboardAvoidingView>
         </View>
@@ -103,5 +98,21 @@ const styles = StyleSheet.create({
 
 export default reduxForm({
     form:'logIn'
-})(connect(undefined, undefined)(Registry)
-)
+})(connect(
+    state => ({
+        currentEmail:formValue(state, 'email'),
+        currentPassword:formValue(state, 'password')
+    }),
+    dispatch => ({
+        startLogin(email, password){
+            dispatch(actions.startLogin(email, password))
+        }
+    }),
+    (stateProps, dispatchProps) => ({
+        currentEmail:stateProps.currentEmail,
+        currentPassword:stateProps.currentPassword,
+        startLogin(){
+            dispatchProps.startLogin(stateProps.currentEmail, stateProps.currentPassword)
+        }
+    })
+    )(Registry))
