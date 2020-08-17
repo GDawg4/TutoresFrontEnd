@@ -12,7 +12,7 @@ import Registry from "./src/components/LogIn";
 import Header from "./src/components/Header";
 import NewAccount from "./src/components/SignUp";
 import Home from './src/components/Home';
-
+import Normalize from './src/normalize.css'
 const App = ()=>(
     <Provider store = {store}>
         <Router>
