@@ -8,17 +8,27 @@ import FormTextInput from "../FormTextInput";
 import Button from "../Button";
 import cafeteria from '../../assets/cafeteria.jpg'
 import * as actions from '../../actions/auth'
+import logouvg from '../../assets/logo.jpg'
 
 const formValue = formValueSelector('logIn');
 
 const Registry = ({startLogin}) => {
     return(
         <View style = {styles.global}>
+            <Image
+                style={styles.tinyLogo}
+                source={logouvg}
+            />
+
             <View style={styles.imageContainer}>
                 <Image source = {cafeteria} style = {styles.image}/>
             </View>
-            <KeyboardAvoidingView style = {styles.container}>
-                <View style = {styles.elements}>
+            
+            <View style={{flex: 1, flexDirection: 'column', width: '100%', height: '100%'}}>
+                <View> Tutorías en línea para la Universidad del Valle de Guatemala</View>
+                <KeyboardAvoidingView style = {styles.container}>
+
+                    <View style = {styles.elements}>
                     <Text style = {styles.inputTitle}>Ingreso</Text>
                     <Field
                         name = {'email'}
@@ -28,6 +38,7 @@ const Registry = ({startLogin}) => {
                         autoCapitalize='none'
                         returnKeyType='next'
                     />
+
                     <Field
                         name = {'password'}
                         component={FormTextInput}
@@ -36,12 +47,19 @@ const Registry = ({startLogin}) => {
                         autoCapitalize='none'
                         returnKeyType='next'
                     />
+                    <Button label={'INICIAR SESIÓN'} disabled={false} remove={true} onPress={startLogin} greencolor={true}/>
+                    <Button label={'REGISTRARSE'} disabled={false} remove={true} onPress={startLogin} greencolor={false}>
                     <Link to='/register'>
-                        <Text style = {styles.smallPrint}>Registrarse</Text>
+                    <Text style = {styles.smallPrint}  greencolor={true}>Registrarse</Text>
                     </Link>
-                    <Button label={'Entrar'} disabled={false} onPress={startLogin}/>
-                </View>
-            </KeyboardAvoidingView>
+                </Button>
+
+                    </View>
+                </KeyboardAvoidingView>
+
+
+            </View>
+          
         </View>
     )
 }
@@ -52,16 +70,24 @@ const styles = StyleSheet.create({
         borderWidth:1,
         borderRadius:10,
         borderColor:'#000000',
-        position:'absolute',
-        top:'30%',
-        height:'40%',
-        width:'20%',
-        flexDirection:'column'
+        position:'relative',
+        width: '60%',
+        height: '50%',
+        flexDirection:'column',
+        alignSelf: 'center'
+        
+    },
+    tinyLogo: {
+        width: 50,
+        height: 50,
+        top: '-4%',
+        left: '-42%'
     },
     elements:{
-        marginLeft:'5%',
-        marginRight:'5%',
-        marginTop:'10%'
+        marginLeft:'10%',
+        marginRight:'10%',
+        marginTop:'10%',
+        flex: 1
     },
     image:{
         height:'100%',
@@ -78,7 +104,8 @@ const styles = StyleSheet.create({
         height:'100%',
         position:'absolute',
         left: 0,
-        top: '5%'
+        top: '5%',
+        flex: 2
     },
     global:{
         height:'91%',
@@ -93,6 +120,9 @@ const styles = StyleSheet.create({
         fontColor:'blue',
         textAlign:'center',
         marginBottom:'5%'
+    },
+    buttons: {
+        color: '#FF0000'
     }
 })
 
