@@ -17,10 +17,30 @@ export const completeLogin = token => ({
 
 export const failLogin = error => ({
     type: types.AUTHENTICATION_FAILED,
-    payload: { 
+    payload: {
         error,
     },
 });
+
+export const startRegister = (email, password1, password2, universityid) => ({
+    type: types.REGISTER_STARTED,
+    payload: {
+        email,
+        password1,
+        password2,
+        universityid
+    },
+})
+  
+export const completeRegister = token => ({
+type: types.REGISTER_COMPLETED,
+payload: { token },
+})
+
+export const failRegister = error => ({
+type: types.REGISTER_FAILED,
+payload: { error },
+})
 
 export const logout = () => ({
     type: types.AUTHENTICATION_IDENTITY_CLEARED,

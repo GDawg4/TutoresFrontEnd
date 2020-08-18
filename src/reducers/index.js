@@ -15,6 +15,7 @@ export const getSelectedClass = (state) => classesSelectors.getSelectedClass(sta
 
 export const getAuthToken = state => authSelectors.getAuthToken(state.reducer.auth);
 export const getIsAuthenticating = state => authSelectors.getIsAuthenticating(state.reducer.auth);
+export const getIsRegistrating = state => authSelectors.getIsRegistrating(state.reducer.auth);
 export const getAuthenticatingError = state => authSelectors.getAuthenticatingError(state.reducer.auth);
 export const getAuthUserId = state => authSelectors.getAuthUserId(state.reducer.auth);
 export const getAuthExpiration = state => authSelectors.getAuthExpiration(state.reducer.auth);
