@@ -16,7 +16,9 @@ const styles = StyleSheet.create({
       backgroundColor: '#078B45',
     },
     buttonColorBlue: {
-      backgroundColor: '#428AF9',
+      backgroundColor: '#0099ba',
+      borderColor:'#0099ba',
+      height: '15%'
     },
     containerDisabled: {
         opacity: 0.4
