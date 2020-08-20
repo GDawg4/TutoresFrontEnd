@@ -1,32 +1,49 @@
 import React from 'react'
 import {View, Text, StyleSheet, KeyboardAvoidingView} from "react-native";
-import {Field, reduxForm} from "redux-form";
+import {Field, reduxForm, formValueSelector} from "redux-form";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
+
+import * as actions from '../../actions/auth';
+import * as selectors from '../../reducers';
+
 
 import FormTextInput from "../FormTextInput";
 import Button from "../Button";
 
-const NewAccount = () => (
+const formValue = formValueSelector('signUp');
+
+const NewAccount = (
+    {startSignUp}
+) => (
     <View style = {styles.global}>
         <View style = {{width:'10%', position: 'absolute', top:0}}>
-            <Button label={'Regresar'}/>
+            <Link to='/'>
+                <Button label={'Regresar'}/>
+            </Link>
         </View>
         <KeyboardAvoidingView style = {styles.infoContainer}>
             <View style = {styles.elements}>
                 <Text>Ingresa tus datos</Text>
                 <Field
-                    name = {'newAccountLastName'}
+                    name = {'newAccountEmail'}
                     component={FormTextInput}
-                    placeholder={'Nombre'}
+                    placeholder={'Email'}
                     autoCapitalize='none'
                     returnKeyType='next'/>
                 <Field
-                    name = {'newAccountName'}
+                    name = {'newAccountPassword1'}
                     component={FormTextInput}
-                    placeholder={'Apellido'}
+                    placeholder={'Ingrese su contraseña'}
                     autoCapitalize='none'
                     returnKeyType='next'/>
-                <Button label={'Crear nueva cuenta'} onPress={() => console.log('hola')}/>
+                <Field
+                    name = {'newAccountPassword2'}
+                    component={FormTextInput}
+                    placeholder={'Password'}
+                    autoCapitalize='none'
+                    returnKeyType='next'/>
+                <Button label={'Crear nueva cuenta'} onPress={startSignUp}/>
             </View>
         </KeyboardAvoidingView>
     </View>
@@ -57,8 +74,24 @@ const styles = StyleSheet.create({
 })
 
 export default reduxForm({
-    form:'NewAccount',
+    form:'signUp',
 
-})(
-    connect(undefined, undefined)(NewAccount)
-)
+})(connect(
+    state => ({
+        currentEmail:formValue(state, 'newAccountEmail'),
+        currentPassword1:formValue(state, 'newAccountPassword1'),
+        currentPassword2:formValue(state, 'newAccountPassword2'),
+    }),
+    dispatch => ({
+        startRegister(newAccountEmail,newAccountPassword1){
+            dispatch(actions.startRegister(newAccountEmail,newAccountPassword1))
+        }
+    }),
+    (stateProps, dispatchProps) => ({
+        currentEmail:stateProps.newAccountEmail,
+        currentPassword:stateProps.newAccountPassword1,
+        startRegister(){
+            dispatchProps.startRegister(stateProps.currentEmail, stateProps.currentPassword)
+        }
+    })
+    )(NewAccount))

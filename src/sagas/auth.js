@@ -44,6 +44,39 @@ export function* watchLoginStarted() {
         login,
     );
 }
+
+function* signUp(action) {
+    try {
+        const response = yield call(
+            fetch,
+            // Aqui falta poner que llame al API para el signup
+            `${constants.API_BASE_URL_WEB}/sign-up/`,
+            {
+                method: 'POST',
+                body: JSON.stringify(action.payload),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            },
+        );
+        if (response.status === 200) {
+            const { token } = yield response.json();
+            yield put(actions.completecompleteRegister(token));
+        } else {
+            const { non_field_errors } = yield response.json();
+            yield put(actions.failRegister(non_field_errors[0]));
+        }
+    } catch (error) {
+        yield put(actions.failLogin('Error al crear su cuenta. Compruebe su conexión a internet.'));
+    }
+}
+  
+export function* watchSignUpStarted() {
+    yield takeEvery(
+        types.REGISTER_STARTED,
+        signUp,
+    );
+}
   
 function* refreshToken(action) {
     const expiration = yield select(selectors.getAuthExpiration);
