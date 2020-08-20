@@ -33,5 +33,11 @@
     "@expo/webpack-config": "^0.12.22",
     "babel-preset-expo": "~8.1.0"
   },
-  "private": true
+  "private": true,
+  "name": "TutoresFrontEnd",
+  "version": "1.0.0",
+  "description": "PRoyecto de tutorias y horas de beca control",
+  "repository": "https://github.com/GDawg4/TutoresFrontEnd",
+  "author": "Sebastian gonzalez",
+  "license": "MIT"
 }
